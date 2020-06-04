@@ -1,0 +1,8 @@
+*
+!.gitignore
+!default_config.cfg
+!manifest.json
+!requirements.txt
+!README.md
+!plugin.py
+!const.py
