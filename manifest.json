@@ -6,6 +6,6 @@
   "description": "A plugin to integrate with riot games.",
   "author": "urwrstkn8mare",
   "email": "shaikhsamit@rocketmail.com",
-  "url": "https://github.com/urwrstkn8mare/riot-integration",
+  "url": "https://github.com/urwrstkn8mare/gog-riot-integration",
   "script": "plugin.py"
 }
