@@ -2,7 +2,7 @@
   "name": "Riot Games Integration",
   "platform": "riot",
   "guid": "b4c0c2f5-23dc-4326-aa65-e9fabef61a3b",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A plugin to integrate with riot games.",
   "author": "urwrstkn8mare",
   "email": "shaikhsamit@rocketmail.com",

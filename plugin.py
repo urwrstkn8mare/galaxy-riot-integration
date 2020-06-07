@@ -34,7 +34,7 @@ class RiotPlugin(Plugin):
     def __init__(self, reader, writer, token):
         super().__init__(
             Platform.RiotGames,  # choose platform from available list
-            "0.1.0",  # version
+            "0.1.1",  # version
             reader,
             writer,
             token,
