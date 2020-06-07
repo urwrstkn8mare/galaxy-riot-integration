@@ -1,6 +1,5 @@
 *
 !.gitignore
-!default_config.cfg
 !manifest.json
 !requirements.txt
 !README.md
