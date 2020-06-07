@@ -1,6 +1,6 @@
 # Riot Integration - v0.1.1
 
-Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! Note, this
+Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot!
 
 ## Usage
 
@@ -14,7 +14,7 @@ Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\R
 
 ## Todo
 
-Any help would be appreciated!
+Any help (and feedback about this project) would be appreciated!
 
 - [ ] Add Mac support
 - [ ] Automatically determine path to `RiotClientServices.exe`.
