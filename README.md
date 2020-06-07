@@ -4,7 +4,7 @@ Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! Note, this
 
 ## Usage
 
-It's pretty simple. Just place unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. For the plugin to detect any installed Riot games, they must be in your start menu shortcuts. This is simply done by leaving the option to add a desktop shorcut checked. If you don't want the desktop shortcut, you may delete it as it's not required.
+It's pretty simple. Just place unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. For the plugin to detect any installed Riot games, they must be in your start menu shortcuts. This is simply done by leaving the option to add a desktop shorcut checked (it's checked by default). If you don't want the desktop shortcut, you may delete it as it's not required.
 
 Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\Riot Games\Riot Client\RiotClientServices.exe`. To change it create a file called `riot_client_location.txt` and put the path to the executable in it. Then place the file in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`.
 
