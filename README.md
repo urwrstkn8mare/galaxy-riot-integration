@@ -22,6 +22,6 @@ Any help would be appreciated!
 
 ## Credits
 
-- Heavy inspiration from <https://github.com/FriendsOfGalaxy/galaxy-integration-minecraft,> the fork of: <https://github.com/TouwaStar/Galaxy_Plugin_Minecraft>
+- Heavy inspiration from <https://github.com/FriendsOfGalaxy/galaxy-integration-minecraft>, the fork of: <https://github.com/TouwaStar/Galaxy_Plugin_Minecraft>
 - <https://github.com/tylerbrawl/Galaxy-Utils>
 - And of course: <https://github.com/gogcom/galaxy-integrations-python-api>
