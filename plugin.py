@@ -1,4 +1,4 @@
-import sys, platform, os, requests, asyncio, subprocess
+import sys, platform, os, requests, asyncio, subprocess, pickle, logging
 from galaxy.api.plugin import Plugin, create_and_run_plugin
 from galaxy.api.consts import Platform, OSCompatibility
 from galaxy.api.types import (
@@ -22,7 +22,8 @@ from const import (
     INSTALLER_PATH,
     RIOT_CLIENT_LOCATION,
 )
-import pickle
+
+logger = logging.getLogger(__name__)
 
 
 def is_windows():
@@ -67,6 +68,7 @@ class RiotPlugin(Plugin):
         )
 
     async def get_owned_games(self):
+        logger.info("Getting owned games")
         return [
             Game(
                 GameID.league_of_legends,
@@ -89,11 +91,11 @@ class RiotPlugin(Plugin):
         ]
 
     async def get_local_games(self):
-        return [
-            LocalGame(GameID.league_of_legends, LocalGameState.None_),
-            LocalGame(GameID.legends_of_runeterra, LocalGameState.None_),
-            LocalGame(GameID.valorant, LocalGameState.None_),
-        ]
+        logger.info("Getting local games")
+        out = []
+        for key in self._running.keys():
+            out.append(LocalGame(key, self._running[key]["status"]))
+        return out
 
     async def uninstall_game(self, game_id):
         os.system("appwiz.cpl")
@@ -103,6 +105,7 @@ class RiotPlugin(Plugin):
         self._running[game_id]["proc"] = subprocess.Popen(cmd)
 
     async def get_os_compatibility(self, game_id, context):
+        logger.info("Getting os compatibility")
         if game_id == GameID.league_of_legends:
             return OSCompatibility.Windows | OSCompatibility.MacOS
         elif game_id == GameID.legends_of_runeterra:
@@ -113,6 +116,7 @@ class RiotPlugin(Plugin):
             return
 
     async def install_game(self, game_id):
+        logger.info("Installing game")
         if os.path.exists(RIOT_CLIENT_LOCATION):
             subprocess.Popen(
                 f'"{RIOT_CLIENT_LOCATION}" --launch-product={game_id} --launch-patchline=live'
@@ -138,6 +142,7 @@ class RiotPlugin(Plugin):
             "Legends of Runeterra.lnk" in shortcuts
         )
         self._installed[GameID.valorant] = "VALORANT.lnk" in shortcuts
+        logger.info(f"Checked installed: {self._installed}")
         await asyncio.sleep(15)
 
     async def _check_running(self):
@@ -187,6 +192,7 @@ class RiotPlugin(Plugin):
                     self.update_local_game_status(
                         LocalGame(key, LocalGameState.Installed)
                     )
+        logger.info(f"Checked running: {self._running}")
         await asyncio.sleep(5)
 
     def tick(self):
@@ -201,6 +207,7 @@ class RiotPlugin(Plugin):
             self._check_installed_task = self.create_task(
                 self._check_installed(), "Check Installed Task"
             )
+        logger.info("Tick!")
 
     def handshake_complete(self):
         if GAME_TIME_CACHE_KEY in self.persistent_cache:
