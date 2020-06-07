@@ -8,6 +8,10 @@ It's pretty simple. Just place unzip the file from [releases](https://github.com
 
 Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\Riot Games\Riot Client\RiotClientServices.exe`. To change it create a file called `riot_client_location.txt` and put the path to the executable in it. Then place the file in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`.
 
+## Known Issues
+
+- If you press sync integratiom games lose installed status for some reason (working on it right now!)
+
 ## Todo
 
 Any help would be appreciated!
