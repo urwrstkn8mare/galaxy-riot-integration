@@ -16,9 +16,9 @@ Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\R
 
 Any help (and feedback about this project) would be appreciated!
 
-- [ ] Add Mac support
-- [ ] Automatically determine path to `RiotClientServices.exe`.
-- [ ] Not require start menu shortcuts to be available.
+- [ ] Add Mac support (I'm currently working on this but ETA is not soon.)
+- [ ] Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. Spoiler alert - it's hard)
+- [ ] Not require start menu shortcuts to be available. (can't figure this out)
 - [ ] Maybe changed the formatting of the code to something other than [Black](https://github.com/psf/black). Its consistent but not as nice as some other styles of formatting.
 
 ## Credits
