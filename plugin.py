@@ -11,7 +11,7 @@ from galaxy.api.types import (
 )
 from galaxyutils.time_tracker import TimeTracker, GameNotTrackedException
 
-from const import (
+from consts import (
     START_MENU_FOLDER,
     GameID,
     LOL_DOWNLOAD,
