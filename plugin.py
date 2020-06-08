@@ -1,4 +1,4 @@
-import sys, platform, asyncio, pickle, logging
+import sys, platform, asyncio, pickle, logging, json
 from galaxy.api.plugin import Plugin, create_and_run_plugin
 from galaxy.api.consts import Platform, OSCompatibility
 from galaxy.api.types import (
@@ -9,11 +9,7 @@ from galaxy.api.types import (
 )
 from galaxyutils.time_tracker import TimeTracker, GameNotTrackedException
 
-from consts import (
-    GameID,
-    LOCAL_FILE_CACHE,
-    GAME_TIME_CACHE_KEY,
-)
+from consts import GameID, LOCAL_FILE_CACHE, GAME_TIME_CACHE_KEY, MANIFEST
 from windows_local import WindowsLocalClient
 
 logger = logging.getLogger(__name__)
@@ -25,13 +21,9 @@ def is_windows():
 
 class RiotPlugin(Plugin):
     def __init__(self, reader, writer, token):
-        super().__init__(
-            Platform.RiotGames,  # choose platform from available list
-            "0.1.1",  # version
-            reader,
-            writer,
-            token,
-        )
+        with open(MANIFEST) as f:
+            version = json.load(f)["version"]
+        super().__init__(Platform.RiotGames, version, reader, writer, token)
         self._check_running_task = None
         self._check_installed_task = None
         self.game_time_cache = None

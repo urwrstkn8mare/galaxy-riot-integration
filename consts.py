@@ -18,6 +18,9 @@ VALORANT_DOWNLOAD = "https://valorant.secure.dyn.riotcdn.net/channels/public/x/i
 LOCAL_FILE_CACHE = os.path.abspath(
     os.path.join(os.path.abspath(__file__), "..", "..", "play_time_cache.txt")
 )
+MANIFEST = LOCAL_FILE_CACHE = os.path.abspath(
+    os.path.join(os.path.abspath(__file__), "..", "manifest.json")
+)
 GAME_TIME_CACHE_KEY = "game_time_cache"
 INSTALLER_PATH = os.path.abspath(
     os.path.join(os.path.abspath(__file__), "..", "..", "riot_installer.exe")

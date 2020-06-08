@@ -1,4 +1,4 @@
-# Riot Integration - v0.1.1
+# Riot Integration - v0.1.2
 
 Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot!
 
