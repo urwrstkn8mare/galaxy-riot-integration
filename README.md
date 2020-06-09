@@ -19,6 +19,7 @@ Any help (and feedback about this project) would be appreciated!
 - [ ] Add Mac support (I'm currently working on this but ETA is not soon.)
 - [ ] Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. Spoiler alert - it's hard)
 - [ ] Not require start menu shortcuts to be available. (can't figure this out)
+- [ ] Support friend recomendation and presence. (this may or may not be possible though)
 - [ ] Maybe changed the formatting of the code to something other than [Black](https://github.com/psf/black). Its consistent but not as nice as some other styles of formatting.
 
 ## Credits
