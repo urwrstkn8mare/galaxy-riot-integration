@@ -14,10 +14,10 @@ Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\R
 
 ## Todo
 
-Any help (and feedback about this project) would be appreciated!
+Any help (and feedback about this project) would be appreciated! If you want to add something or do a task feel free to do it and I'd appreciate a pull request.
 
-- [ ] Add Mac support (I'm currently working on this but ETA is not soon.)
-- [ ] Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. Spoiler alert - it's hard)
+- [ ] Add Mac support (right now it is too time consuming to fit in with school)
+- [ ] Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)
 - [ ] Not require start menu shortcuts to be available. (can't figure this out)
 - [ ] Support friend recomendation and presence. (this may or may not be possible though)
 - [ ] Maybe changed the formatting of the code to something other than [Black](https://github.com/psf/black). Its consistent but not as nice as some other styles of formatting.
