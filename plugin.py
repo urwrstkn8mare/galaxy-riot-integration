@@ -23,6 +23,7 @@ class RiotPlugin(Plugin):
     def __init__(self, reader, writer, token):
         with open(MANIFEST) as f:
             version = json.load(f)["version"]
+        logger.info(f"Riot Plugin Version: {version}")
         super().__init__(Platform.RiotGames, version, reader, writer, token)
         self._check_running_task = None
         self._check_installed_task = None
