@@ -6,12 +6,6 @@ RIOT_CLIENT_LOCATION = "C:\\Riot Games\\Riot Client\\RiotClientServices.exe"
 RIOT_CLIENT_LOCATION_FILE = os.path.expandvars(
     "%LOCALAPPDATA%\\GOG.com\\Galaxy\\plugins\\installed\\riot_client_location.txt"
 )
-logger.info("RIOT_CLIENT_LOCATION_FILE: %s", RIOT_CLIENT_LOCATION_FILE)
-if os.path.isfile(RIOT_CLIENT_LOCATION_FILE):
-    with open(RIOT_CLIENT_LOCATION_FILE) as f:
-        RIOT_CLIENT_LOCATION = f.readline().strip()
-logger.info("RIOT_CLIENT_LOCATION: %s", RIOT_CLIENT_LOCATION)
-
 START_MENU_FOLDER = (
     "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Riot Games"
 )
@@ -31,3 +25,14 @@ class GameID:
     league_of_legends = "league_of_legends"
     legends_of_runeterra = "bacon"
     valorant = "valorant"
+
+
+if os.path.isfile(RIOT_CLIENT_LOCATION_FILE):
+    with open(RIOT_CLIENT_LOCATION_FILE) as f:
+        path = os.path.abspath(f.readline().strip().strip('"'))
+        RIOT_CLIENT_LOCATION = (
+            path
+            if "RiotClientServices.exe" in path
+            else os.path.join(path, "RiotClientServices.exe",)
+        )
+logger.info("RIOT_CLIENT_LOCATION: %s", RIOT_CLIENT_LOCATION)
