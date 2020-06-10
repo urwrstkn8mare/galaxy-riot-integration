@@ -12,6 +12,11 @@ Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\R
 
 - ~~If you press sync integratiom games lose installed status for some reason (working on it right now!)~~
 
+## FAQ
+
+- _Game time doesn't show the time before I added the plugin._
+  That's because Riot doesn't record gametime. The plugin will only display gametime while you've launched it via GOG Galaxy 2.0 just like if you had added it manually.
+
 ## Todo
 
 Any help (and feedback about this project) would be appreciated! If you want to add something or do a task feel free to do it and I'd appreciate a pull request.
