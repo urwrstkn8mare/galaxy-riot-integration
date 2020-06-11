@@ -5,3 +5,6 @@
 !README.md
 !plugin.py
 !consts.py
+!common.py
+!windows.py
+!mac.py
