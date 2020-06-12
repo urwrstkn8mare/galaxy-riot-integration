@@ -1,6 +1,8 @@
 # Riot Integration - v0.1.3
 
-Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594).
+Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594). See [Usage](https://github.com/urwrstkn8mare/gog-riot-integration#usage).
+
+![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/games.png)
 
 ## Usage
 
