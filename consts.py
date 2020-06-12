@@ -42,3 +42,10 @@ class GameID:
 
 
 # ================================== MAC ===================================== #
+MAC_INSTALLER = LOCAL_FILE_CACHE = os.path.abspath(
+    os.path.join(os.path.abspath(__file__), "..", "mac_installer.sh")
+)
+MAC_UNINSTALLER = LOCAL_FILE_CACHE = os.path.abspath(
+    os.path.join(os.path.abspath(__file__), "..", "mac_uninstaller.sh")
+)
+LOL_BUNDLE_IDENTIFIER = "com.riotgames.leagueoflegends"

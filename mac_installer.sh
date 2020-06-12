@@ -1,0 +1,5 @@
+wget "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.na.zip"
+unzip "live.na.zip"
+open --wait-apps -a "Install League of Legends na.app"
+rm -rf "Install League of Legends na.app"
+rm "live.na.zip"

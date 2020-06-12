@@ -8,3 +8,5 @@
 !common.py
 !windows.py
 !mac.py
+!mac_installer.sh
+!mac_uninstaller.sh
