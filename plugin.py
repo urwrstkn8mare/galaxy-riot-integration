@@ -43,14 +43,8 @@ class RiotPlugin(Plugin):
         self._check_installed_task = None
         self.game_time_cache = None
         self._running = {
-            GameID.league_of_legends: {
-                "proc": None,
-                "status": LocalGameState.None_,
-            },
-            GameID.legends_of_runeterra: {
-                "proc": None,
-                "status": LocalGameState.None_,
-            },
+            GameID.league_of_legends: {"proc": None, "status": LocalGameState.None_,},
+            GameID.legends_of_runeterra: {"proc": None, "status": LocalGameState.None_,},
             GameID.valorant: {"proc": None, "status": LocalGameState.None_},
         }
         self._installed = {
@@ -58,14 +52,11 @@ class RiotPlugin(Plugin):
             GameID.legends_of_runeterra: False,
             GameID.valorant: False,
         }
+        self.game_time_tracker = None
 
     async def authenticate(self, stored_credentials=None):
         self.store_credentials({"dummy": "dummy"})
-        return (
-            Authentication("riot_user", "Riot User")
-            if is_windows()
-            else Authentication()
-        )
+        return Authentication("riot_user", "Riot User") if is_windows() else Authentication()
 
     async def get_owned_games(self):
         logger.info("Getting owned games")
@@ -82,12 +73,7 @@ class RiotPlugin(Plugin):
                 None,
                 LicenseInfo(LicenseType.FreeToPlay),
             ),
-            Game(
-                GameID.valorant,
-                "Valorant",
-                None,
-                LicenseInfo(LicenseType.FreeToPlay),
-            ),
+            Game(GameID.valorant, "Valorant", None, LicenseInfo(LicenseType.FreeToPlay),),
         ]
 
     async def get_local_games(self):
@@ -135,12 +121,8 @@ class RiotPlugin(Plugin):
 
     async def _check_installed(self):
         shortcuts = os.listdir(START_MENU_FOLDER)
-        self._installed[GameID.league_of_legends] = (
-            "League of Legends.lnk" in shortcuts
-        )
-        self._installed[GameID.legends_of_runeterra] = (
-            "Legends of Runeterra.lnk" in shortcuts
-        )
+        self._installed[GameID.league_of_legends] = "League of Legends.lnk" in shortcuts
+        self._installed[GameID.legends_of_runeterra] = "Legends of Runeterra.lnk" in shortcuts
         self._installed[GameID.valorant] = "VALORANT.lnk" in shortcuts
         logger.info(f"Checked installed: {self._installed}")
         await asyncio.sleep(15)
@@ -153,24 +135,21 @@ class RiotPlugin(Plugin):
                 and self._running[key]["status"]
                 != LocalGameState.Installed | LocalGameState.Running
             ):
-                self._running[key]["status"] = (
-                    LocalGameState.Installed | LocalGameState.Running
-                )
+                self._running[key]["status"] = LocalGameState.Installed | LocalGameState.Running
                 self.update_local_game_status(
-                    LocalGame(
-                        key, LocalGameState.Installed | LocalGameState.Running,
-                    )
+                    LocalGame(key, LocalGameState.Installed | LocalGameState.Running,)
                 )
-                self.game_time_tracker.start_tracking_game(key)
+                if self.game_time_tracker is not None:
+                    self.game_time_tracker.start_tracking_game(key)
             elif (
-                self._running[key]["proc"] is None
-                or self._running[key]["proc"].poll() is not None
+                self._running[key]["proc"] is None or self._running[key]["proc"].poll() is not None
             ):
                 if (
                     self._running[key]["status"]
                     == LocalGameState.Installed | LocalGameState.Running
                 ):
-                    self.game_time_tracker.stop_tracking_game(key)
+                    if self.game_time_tracker is not None:
+                        self.game_time_tracker.stop_tracking_game(key)
 
                 if (
                     self._running[key]["status"] != LocalGameState.None_
@@ -179,9 +158,7 @@ class RiotPlugin(Plugin):
                     self._running[key]["status"] = self._running[key][
                         "status"
                     ] = LocalGameState.None_
-                    self.update_local_game_status(
-                        LocalGame(key, LocalGameState.None_)
-                    )
+                    self.update_local_game_status(LocalGame(key, LocalGameState.None_))
                 elif (
                     self._running[key]["status"] != LocalGameState.Installed
                     and self._installed[key]
@@ -189,27 +166,21 @@ class RiotPlugin(Plugin):
                     self._running[key]["status"] = self._running[key][
                         "status"
                     ] = LocalGameState.Installed
-                    self.update_local_game_status(
-                        LocalGame(key, LocalGameState.Installed)
-                    )
+                    self.update_local_game_status(LocalGame(key, LocalGameState.Installed))
         logger.info(f"Checked running: {self._running}")
         await asyncio.sleep(5)
 
     def tick(self):
         if self._check_running_task is None or self._check_running_task.done():
-            self._check_running_task = self.create_task(
-                self._check_running(), "Check Running Task"
-            )
-        if (
-            self._check_installed_task is None
-            or self._check_installed_task.done()
-        ):
+            self._check_running_task = self.create_task(self._check_running(), "Check Running Task")
+        if self._check_installed_task is None or self._check_installed_task.done():
             self._check_installed_task = self.create_task(
                 self._check_installed(), "Check Installed Task"
             )
         logger.info("Tick!")
 
     def handshake_complete(self):
+        self.game_time_cache = None
         if GAME_TIME_CACHE_KEY in self.persistent_cache:
             self.game_time_cache = pickle.loads(
                 bytes.fromhex(self.persistent_cache[GAME_TIME_CACHE_KEY])
@@ -223,17 +194,12 @@ class RiotPlugin(Plugin):
                         break
                 file.close()
             except FileNotFoundError:
-                self.game_time_tracker = TimeTracker()
-                return
-        self.game_time_tracker = TimeTracker(
-            game_time_cache=self.game_time_cache
-        )
+                pass
+        self.game_time_tracker = TimeTracker(game_time_cache=self.game_time_cache)
 
     def game_times_import_complete(self):
         self.game_time_cache = self.game_time_tracker.get_time_cache_hex()
-        self.persistent_cache[
-            GAME_TIME_CACHE_KEY
-        ] = self.game_time_tracker.get_time_cache_hex()
+        self.persistent_cache[GAME_TIME_CACHE_KEY] = self.game_time_tracker.get_time_cache_hex()
         self.push_cache()
 
     async def shutdown(self):
