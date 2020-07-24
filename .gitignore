@@ -1,8 +1,8 @@
-*
-!.gitignore
-!manifest.json
-!requirements.txt
-!README.md
-!plugin.py
-!consts.py
-!screenshot.png
+*.pyc
+*.pyo
+*__pycache__
+*.DS_STORE
+out
+.vscode
+galaxy-riot-integration-windows.zip
+galaxy-riot-integration-mac.zip
