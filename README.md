@@ -6,7 +6,7 @@ Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! If you're won
 
 ## Usage
 
-It's pretty simple. Just unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. Make sure to delete any other versions of this plugin first and quit GOG Galaxy.
+It's pretty simple. Just unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. Make sure to delete any other versions of this integration first and quit GOG Galaxy.
 
 ## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
 
@@ -17,13 +17,13 @@ See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labe
 When/if filing an issue please make sure to do the following:
 
 1. Check [Known Issues](#known-issues).
-2. Attach the log file for the plugin. Can be found in `%programdata%\GOG.com\Galaxy\logs` and will have `riot` in its name.
-3. Try earlier versions of the plugin. It's really helpful to know if the issue was caused by a change I made in a newer version.
+2. Attach the log file for the integration. Can be found in `%programdata%\GOG.com\Galaxy\logs` and will have `riot` in its name.
+3. Try earlier versions of the integration. It's really helpful to know if the issue was caused by a change I made in a newer version.
 
 ## FAQ
 
-- _Game time doesn't show the time before I added the plugin._
-  That's because Riot doesn't record gametime. The plugin will only display gametime while you've launched it via GOG Galaxy 2.0 just like if you had added it manually.
+- _Game time doesn't show the time before I added the integration._
+  That's because Riot doesn't record gametime. The integration will only display gametime while you've launched it via GOG Galaxy 2.0 just like if you had added it manually.
 
 ## Todo
 
