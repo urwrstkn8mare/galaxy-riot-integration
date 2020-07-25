@@ -187,7 +187,7 @@ the top for more info.
                         else:
                             print("Failed")
                             return
-            out = os.path.join(installed_dir, "test_plugin")
+            out = os.path.join(installed_dir, f"{platform}_test_plugin")
             build(out=out)
         else:
             out, plat = None, None

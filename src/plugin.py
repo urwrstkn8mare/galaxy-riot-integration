@@ -1,4 +1,5 @@
-import sys, platform, os, requests, asyncio, subprocess, pickle, logging
+import sys, asyncio, pickle, logging
+
 from galaxy.api.plugin import Plugin, create_and_run_plugin
 from galaxy.api.consts import Platform, OSCompatibility
 from galaxy.api.types import (
@@ -9,25 +10,13 @@ from galaxy.api.types import (
     LocalGame,
     LocalGameState,
 )
-from galaxyutils.time_tracker import TimeTracker, GameNotTrackedException
+from galaxyutils import time_tracker
 
-from consts import (
-    START_MENU_FOLDER,
-    GameID,
-    LOL_DOWNLOAD,
-    LOR_DOWNLOAD,
-    VALORANT_DOWNLOAD,
-    LOCAL_FILE_CACHE,
-    GAME_TIME_CACHE_KEY,
-    INSTALLER_PATH,
-    RIOT_CLIENT_LOCATION,
-)
+from consts import GameID, DOWNLOAD_URL, GAME_IDS, LOCAL_FILE_CACHE
+from local import LocalClient
+import utils
 
-logger = logging.getLogger(__name__)
-
-
-def is_windows():
-    return platform.system().lower() == "windows"
+log = logging.getLogger(__name__)
 
 
 class RiotPlugin(Plugin):
@@ -39,27 +28,17 @@ class RiotPlugin(Plugin):
             writer,
             token,
         )
-        self._check_running_task = None
-        self._check_installed_task = None
-        self.game_time_cache = None
-        self._running = {
-            GameID.league_of_legends: {"proc": None, "status": LocalGameState.None_,},
-            GameID.legends_of_runeterra: {"proc": None, "status": LocalGameState.None_,},
-            GameID.valorant: {"proc": None, "status": LocalGameState.None_},
-        }
-        self._installed = {
-            GameID.league_of_legends: False,
-            GameID.legends_of_runeterra: False,
-            GameID.valorant: False,
-        }
         self.game_time_tracker = None
+        self.local_client = LocalClient()
+        self.status = dict.fromkeys(GAME_IDS, LocalGameState.None_)
+        self._update_task = None
 
     async def authenticate(self, stored_credentials=None):
         self.store_credentials({"dummy": "dummy"})
-        return Authentication("riot_user", "Riot User") if is_windows() else Authentication()
+        return Authentication("riot_user", "Riot User")
 
     async def get_owned_games(self):
-        logger.info("Getting owned games")
+        log.info("Getting owned games")
         return [
             Game(
                 GameID.league_of_legends,
@@ -77,113 +56,96 @@ class RiotPlugin(Plugin):
         ]
 
     async def get_local_games(self):
-        logger.info("Getting local games")
-        out = []
-        for key in self._running.keys():
-            out.append(LocalGame(key, self._running[key]["status"]))
+        log.info("Getting local games")
+        out = [LocalGame(key, self.status[key]) for key in self.status.keys()]
         return out
 
+    async def prepare_local_size_context(self, game_ids):
+        sizes = []
+        for game_id in GAME_IDS:
+            size = await utils.get_size_at_path(
+                self.local_client.install_location[game_id], if_none=0
+            )
+            if game_id == GameID.valorant:
+                size += await utils.get_size_at_path(
+                    self.local_client.install_location[GameID.vanguard], if_none=0
+                )
+            if size == 0:
+                size = None
+            sizes.append(size)
+        return dict(zip(game_ids, sizes))
+
+    async def get_local_size(self, game_id: str, context):
+        return context[game_id]
+
     async def uninstall_game(self, game_id):
-        os.system("appwiz.cpl")
+        self.local_client.update_installed()
+        self.local_client.uninstall(game_id)
+        if game_id == GameID.valorant and self.local_client._vangaurd_uninstall_path is not None:
+            utils.open_path(self.local_client._vangaurd_uninstall_path)
 
     async def launch_game(self, game_id):
-        cmd = f'"{RIOT_CLIENT_LOCATION}" --launch-product={game_id} --launch-patchline=live'
-        self._running[game_id]["proc"] = subprocess.Popen(cmd)
+        self.local_client.update_installed()
+        self.local_client.launch(game_id)
 
     async def get_os_compatibility(self, game_id, context):
-        logger.info("Getting os compatibility")
+        log.info("Getting os compatibility")
         if game_id == GameID.league_of_legends:
             return OSCompatibility.Windows | OSCompatibility.MacOS
         elif game_id == GameID.legends_of_runeterra:
             return OSCompatibility.Windows
         elif game_id == GameID.valorant:
             return OSCompatibility.Windows
-        else:
-            return
 
     async def install_game(self, game_id):
-        logger.info("Installing game")
-        if os.path.exists(RIOT_CLIENT_LOCATION):
-            subprocess.Popen(
-                f'"{RIOT_CLIENT_LOCATION}" --launch-product={game_id} --launch-patchline=live'
-            )
+        log.info("Installing game")
+        self.local_client.update_installed()
+        if self.local_client._riot_client_services_path is None:
+            utils.open_path(utils.download(DOWNLOAD_URL[game_id]))
         else:
-            url = ""
-            if game_id == GameID.league_of_legends:
-                url = LOL_DOWNLOAD
-            elif game_id == GameID.legends_of_runeterra:
-                url = LOR_DOWNLOAD
-            elif game_id == GameID.valorant:
-                url = VALORANT_DOWNLOAD
-            r = requests.get(url, allow_redirects=True)
-            open(INSTALLER_PATH, "wb").write(r.content)
-            subprocess.Popen(INSTALLER_PATH)
+            self.local_client.launch(game_id, save_process=False)
 
-    async def _check_installed(self):
-        shortcuts = os.listdir(START_MENU_FOLDER)
-        self._installed[GameID.league_of_legends] = "League of Legends.lnk" in shortcuts
-        self._installed[GameID.legends_of_runeterra] = "Legends of Runeterra.lnk" in shortcuts
-        self._installed[GameID.valorant] = "VALORANT.lnk" in shortcuts
-        logger.info(f"Checked installed: {self._installed}")
-        await asyncio.sleep(15)
+    async def _update(self):
+        def update(game_id, status: LocalGameState):
+            if self.status[game_id] != status:
+                self.status[game_id] = status
+                self.update_local_game_status(LocalGame(game_id, status))
+                log.info(f"Updated {game_id} to {status}")
+                return True  # return true if needed to update
+            return False
 
-    async def _check_running(self):
-        for key in self._running.keys():
-            if (
-                self._running[key]["proc"] is not None
-                and self._running[key]["proc"].poll() is None
-                and self._running[key]["status"]
-                != LocalGameState.Installed | LocalGameState.Running
-            ):
-                self._running[key]["status"] = LocalGameState.Installed | LocalGameState.Running
-                self.update_local_game_status(
-                    LocalGame(key, LocalGameState.Installed | LocalGameState.Running,)
-                )
-                if self.game_time_tracker is not None:
-                    self.game_time_tracker.start_tracking_game(key)
-            elif (
-                self._running[key]["proc"] is None or self._running[key]["proc"].poll() is not None
-            ):
-                if (
-                    self._running[key]["status"]
-                    == LocalGameState.Installed | LocalGameState.Running
-                ):
-                    if self.game_time_tracker is not None:
-                        self.game_time_tracker.stop_tracking_game(key)
+        self.local_client.update_installed()
+        for game_id in GAME_IDS:
+            if self.local_client.game_running(game_id):
+                if update(game_id, LocalGameState.Installed | LocalGameState.Running):
+                    self.game_time_tracker.start_tracking_game(game_id)
+            if self.local_client.game_installed(game_id):
+                if update(game_id, LocalGameState.Installed):
+                    self.game_time_tracker.stop_tracking_game(game_id)
+            else:
+                update(game_id, LocalGameState.None_)
+        log.debug(f"self.local_client.install_location: {self.local_client.install_location}")
+        log.debug(f"self.status: {self.status}")
 
-                if (
-                    self._running[key]["status"] != LocalGameState.None_
-                    and not self._installed[key]
-                ):
-                    self._running[key]["status"] = self._running[key][
-                        "status"
-                    ] = LocalGameState.None_
-                    self.update_local_game_status(LocalGame(key, LocalGameState.None_))
-                elif (
-                    self._running[key]["status"] != LocalGameState.Installed
-                    and self._installed[key]
-                ):
-                    self._running[key]["status"] = self._running[key][
-                        "status"
-                    ] = LocalGameState.Installed
-                    self.update_local_game_status(LocalGame(key, LocalGameState.Installed))
-        logger.info(f"Checked running: {self._running}")
-        await asyncio.sleep(5)
+        await asyncio.sleep(0)
 
     def tick(self):
-        if self._check_running_task is None or self._check_running_task.done():
-            self._check_running_task = self.create_task(self._check_running(), "Check Running Task")
-        if self._check_installed_task is None or self._check_installed_task.done():
-            self._check_installed_task = self.create_task(
-                self._check_installed(), "Check Installed Task"
-            )
-        logger.info("Tick!")
+        if self._update_task is None or self._update_task.done():
+            self._update_task = self.create_task(self._update(), "Update Task")
+
+    # Time Tracker
+
+    async def get_game_time(self, game_id, context):
+        try:
+            return self.game_time_tracker.get_tracked_time(game_id)
+        except time_tracker.GameNotTrackedException:
+            return None
 
     def handshake_complete(self):
-        self.game_time_cache = None
-        if GAME_TIME_CACHE_KEY in self.persistent_cache:
+        utils.cleanup()
+        if "game_time_cache" in self.persistent_cache:
             self.game_time_cache = pickle.loads(
-                bytes.fromhex(self.persistent_cache[GAME_TIME_CACHE_KEY])
+                bytes.fromhex(self.persistent_cache["game_time_cache"])
             )
         else:
             try:
@@ -192,32 +154,29 @@ class RiotPlugin(Plugin):
                     if line[:1] != "#":
                         self.game_time_cache = pickle.loads(bytes.fromhex(line))
                         break
-                file.close()
             except FileNotFoundError:
-                pass
-        self.game_time_tracker = TimeTracker(game_time_cache=self.game_time_cache)
-
-    def game_times_import_complete(self):
-        self.game_time_cache = self.game_time_tracker.get_time_cache_hex()
-        self.persistent_cache[GAME_TIME_CACHE_KEY] = self.game_time_tracker.get_time_cache_hex()
-        self.push_cache()
+                self.game_time_cache = None
+        self.game_time_tracker = time_tracker.TimeTracker(game_time_cache=self.game_time_cache)
 
     async def shutdown(self):
-        if os.path.isfile(INSTALLER_PATH):
-            os.remove(INSTALLER_PATH)
-        if self.game_time_cache:
-            file = open(LOCAL_FILE_CACHE, "w+")
-            file.write("# DO NOT EDIT THIS FILE (pretty pls)\n")
-            file.write(self.game_time_tracker.get_time_cache_hex())
-            file.close()
+        if self.game_time_cache is not None:
+            try:
+                with open(LOCAL_FILE_CACHE, "w+") as file:
+                    file.write("# DO NOT EDIT THIS FILE\n")
+                    file.write(self.game_time_tracker.get_time_cache_hex())
+                    log.info("Wrote to local file cache")
+            except time_tracker.GamesStillBeingTrackedException:
+                log.debug("Game time still being tracked. Not setting local cache yet.")
         await super().shutdown()
 
-    async def get_game_time(self, game_id, context):
+    def game_times_import_complete(self):
         try:
-            time = self.game_time_tracker.get_tracked_time(game_id)
-        except GameNotTrackedException:
-            time = None
-        return time
+            self.game_time_cache = self.game_time_tracker.get_time_cache()
+            log.debug(f"game_time_cache: {self.game_time_cache}")
+            self.persistent_cache["game_time_cache"] = self.game_time_tracker.get_time_cache_hex()
+            self.push_cache()
+        except time_tracker.GamesStillBeingTrackedException:
+            log.debug("Game time still being tracked. Not setting cache yet.")
 
 
 def main():
