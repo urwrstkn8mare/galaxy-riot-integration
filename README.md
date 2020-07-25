@@ -12,6 +12,14 @@ It's pretty simple. Just unzip the file from [releases](https://github.com/urwrs
 
 See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) in issues.
 
+## Issues
+
+When/if filing an issue please make sure to do the following:
+
+1. Check [Known Issues](#known-issues).
+2. Attach the log file for the plugin. Can be found in `%programdata%\GOG.com\Galaxy\logs` and will have `riot` in its name.
+3. Try earlier versions of the plugin. It's really helpful to know if the issue was caused by a change I made in a newer version.
+
 ## FAQ
 
 - _Game time doesn't show the time before I added the plugin._
