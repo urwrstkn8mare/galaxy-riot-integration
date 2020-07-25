@@ -23,7 +23,7 @@ Any help (and feedback about this project) would be appreciated! If you want to 
 
 - [ ] Add Mac support
 - [x] ~~Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)~~
-- [ ] ~~Not require start menu shortcuts to be available.~~ (see [Known Issues](#known-issues))
+- [ ] ~~Not require start menu shortcuts to be available.~~ (see this [issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/6))
 - [ ] Support friend recomendation and presence. (this may not be possible though)
 
 ## Credits
