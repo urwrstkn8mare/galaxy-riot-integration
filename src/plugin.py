@@ -15,6 +15,7 @@ from galaxyutils import time_tracker
 from consts import GameID, DOWNLOAD_URL, GAME_IDS, LOCAL_FILE_CACHE
 from local import LocalClient
 import utils
+from version import __version__
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class RiotPlugin(Plugin):
     def __init__(self, reader, writer, token):
         super().__init__(
             Platform.RiotGames,  # choose platform from available list
-            "0.1.3",  # version
+            __version__,  # version
             reader,
             writer,
             token,
