@@ -1,18 +1,16 @@
 # Riot Integration - v0.1.3
 
-Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594). See [Usage](https://github.com/urwrstkn8mare/gog-riot-integration#usage).
+Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594). For more information, see [Usage](#usage).
 
 ![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
 
 ## Usage
 
-It's pretty simple. Just place unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. For the plugin to detect any installed Riot games, they must be in your start menu shortcuts. This is simply done by leaving the option to add a desktop shorcut checked (it's checked by default). If you don't want the desktop shortcut, you may delete it as it's not required.
-
-Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\Riot Games\Riot Client\RiotClientServices.exe`. To change it create a file called `riot_client_location.txt` and put the path to the executable in it. Then place the file in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. ([need help?](https://youtu.be/rcwvYqD1w7Q))
+It's pretty simple. Just unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`.
 
 ## Known Issues
 
-- ~~If you press sync integratiom games lose installed status for some reason (working on it right now!)~~
+- _Games don't show up as installed_ They may not show up as installed **if you didn't enable shortcuts** when installing them. While the plugin now uses the registry meaning you don't have to specify the the location of `RiotClientServices.exe`, Riot Games for some reason doesn't add a registry entry unless you enable shortcuts. If you didn't enable shortcuts you would have also noticed you can't find the games in Programs & Features, that is why. Unfortunately this is up to Riot Games to fix. Fortunately, however, you can delete both the desktop shorcuts and start menu shortcuts after.
 
 ## FAQ
 
@@ -23,11 +21,10 @@ Note: As of now, the path to `RiotClientServices.exe` is set by default to `C:\R
 
 Any help (and feedback about this project) would be appreciated! If you want to add something or do a task feel free to do it and I'd appreciate a pull request.
 
-- [ ] Add Mac support (don't have much time for it right now)
-- [ ] Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)
-- [ ] Not require start menu shortcuts to be available. (can't figure this out)
-- [ ] Support friend recomendation and presence. (this may or may not be possible though)
-- [ ] Maybe changed the formatting of the code to something other than [Black](https://github.com/psf/black). Its consistent but not as nice as some other styles of formatting.
+- [ ] Add Mac support
+- [x] ~~Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)~~
+- [ ] ~~Not require start menu shortcuts to be available.~~ (see [Known Issues](#known-issues))
+- [ ] Support friend recomendation and presence. (this may not be possible though)
 
 ## Credits
 
@@ -37,4 +34,5 @@ Any help (and feedback about this project) would be appreciated! If you want to 
 
 ## Development / Build Release
 
-`python3 -m pip install -r requirements.txt -t .`
+- Build Release: `python3 build.py -r`
+- Test it in your own GOG Galaxy: `python3 build.py -d`
