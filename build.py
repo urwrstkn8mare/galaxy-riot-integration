@@ -110,6 +110,8 @@ def release(plat=None):
     print("Cleaning up...")
     for dir_ in glob.glob(f"{out}/*.dist-info"):
         shutil.rmtree(dir_)
+    for dir_ in glob.glob(f"{out}/*__pycache__"):
+        shutil.rmtree(dir_)
     for test in glob.glob(f"{out}/**/test_*.py", recursive=True):
         os.remove(test)
     os.remove(os.path.join(out, "compiled-requirements.txt"))
