@@ -8,9 +8,9 @@ Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! If you're won
 
 It's pretty simple. Just unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. Make sure to delete any other versions of this plugin first and quit GOG Galaxy.
 
-## Known Issues
+## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
 
-See [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
+See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) in issues.
 
 ## FAQ
 
