@@ -1,8 +1,12 @@
 # Riot Integration - v0.2.0
 
-Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! You can download it form [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases). If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594). For more information, see [Usage](#usage).
+Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! You can download it form [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases). 
+
+You can also install it using [scoop ](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
 
 ![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
+
+If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594).
 
 ## Usage
 
