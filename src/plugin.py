@@ -29,7 +29,6 @@ class RiotPlugin(Plugin):
             writer,
             token,
         )
-        self.game_time_tracker = None
         self.local_client = LocalClient()
         self.status = dict.fromkeys(GAME_IDS, LocalGameState.None_)
         self._update_task = None
@@ -101,7 +100,7 @@ class RiotPlugin(Plugin):
     async def install_game(self, game_id):
         log.info("Installing game")
         self.local_client.update_installed()
-        if self.local_client._riot_client_services_path is None:
+        if self.local_client.riot_client_services_path is None:
             utils.open_path(utils.download(DOWNLOAD_URL[game_id]))
         else:
             self.local_client.launch(game_id, save_process=False)

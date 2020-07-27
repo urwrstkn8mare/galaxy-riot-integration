@@ -19,7 +19,7 @@ class LocalClient:
     def __init__(self):
         self.process = dict.fromkeys(GAME_IDS, None)
         self.install_location = dict.fromkeys(list(GAME_REGISTY_PATH.keys()), None)
-        self._riot_client_services_path = None
+        self.riot_client_services_path = None
         self._vangaurd_uninstall_path = None
 
     def game_running(self, game_id) -> bool:
@@ -36,7 +36,7 @@ class LocalClient:
 
     def launch(self, game_id, *, save_process=True):
         p = utils.open_path(
-            self._riot_client_services_path,
+            self.riot_client_services_path,
             [f"--launch-product={game_id}", "--launch-patchline=live"],
         )
         if save_process:
@@ -45,7 +45,7 @@ class LocalClient:
 
     def uninstall(self, game_id):
         utils.open_path(
-            self._riot_client_services_path,
+            self.riot_client_services_path,
             [f"--uninstall-product={game_id}", "--uninstall-patchline=live"],
         )
 
@@ -64,7 +64,10 @@ class LocalClient:
             return pth
 
         games = list(GAME_REGISTY_PATH.keys())
-        self._riot_client_services_path = None
+        if self.riot_client_services_path is not None and not os.path.isfile(
+            self.riot_client_services_path
+        ):
+            self.riot_client_services_path = None
         self._vangaurd_uninstall_path = None
         for start_path in REGISTRY_START_PATHS:
             for software_path in SOFTWARE_PATHS:
@@ -77,14 +80,14 @@ class LocalClient:
                         ) as key:
                             if (
                                 game_id != GameID.vanguard
-                                and self._riot_client_services_path is None
+                                and self.riot_client_services_path is None
                             ):
                                 path = get_riot_client_services_path_from_cmd(
                                     winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0]
                                 )
                                 if not os.path.isfile(path):
                                     path = None
-                                self._riot_client_services_path = path
+                                self.riot_client_services_path = path
                             elif game_id == GameID.vanguard:
                                 self._vangaurd_uninstall_path = os.path.abspath(
                                     winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0].strip('"')
