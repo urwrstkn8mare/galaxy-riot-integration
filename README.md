@@ -1,6 +1,6 @@
-# Riot Integration - v0.2.0
+# Riot Integration - v0.2.2
 
-Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! You can download it from [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases). 
+Self explanatroy, a GOG Galaxy 2.0 Community integration for Riot! You can download it from [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases).
 
 You can also install it using [scoop ](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
 
