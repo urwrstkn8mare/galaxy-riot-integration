@@ -121,7 +121,10 @@ class RiotPlugin(Plugin):
                     self.game_time_tracker.start_tracking_game(game_id)
             if self.local_client.game_installed(game_id):
                 if update(game_id, LocalGameState.Installed):
-                    self.game_time_tracker.stop_tracking_game(game_id)
+                    try:
+                        self.game_time_tracker.stop_tracking_game(game_id)
+                    except time_tracker.GameNotTrackedException:
+                        pass
             else:
                 update(game_id, LocalGameState.None_)
         log.debug(f"self.local_client.install_location: {self.local_client.install_location}")
