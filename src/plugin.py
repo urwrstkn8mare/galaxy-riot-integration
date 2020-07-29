@@ -119,7 +119,7 @@ class RiotPlugin(Plugin):
             if self.local_client.game_running(game_id):
                 if update(game_id, LocalGameState.Installed | LocalGameState.Running):
                     self.game_time_tracker.start_tracking_game(game_id)
-            if self.local_client.game_installed(game_id):
+            elif self.local_client.game_installed(game_id):
                 if update(game_id, LocalGameState.Installed):
                     try:
                         self.game_time_tracker.stop_tracking_game(game_id)
