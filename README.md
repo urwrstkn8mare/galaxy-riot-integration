@@ -31,7 +31,7 @@ When/if filing an issue please make sure to do the following:
 
 ## Todo
 
-Any help (and feedback about this project) would be appreciated! If you want to add something or do a task feel free to do it and I'd appreciate a pull request.
+Any help (and feedback about this project) would be appreciated! See [Contributing](#contributing).
 
 - [ ] Add Mac support
 - [x] ~~Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)~~
@@ -41,13 +41,12 @@ Any help (and feedback about this project) would be appreciated! If you want to 
 
 There may be more todos [here](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/todo).
 
+## Contributing
+
+Thanks in advance if you want to contribute! Feel free to complete and [todos](#todo) for me or add anything else you wanted to add. Then just submit a [pull request](https://github.com/urwrstkn8mare/galaxy-riot-integration/pulls)! If you don't understand something about the integration (eg. a part of the code - it may be hard to read sometimes) then feel free to ask me. You can do that via an issue, Discord ([GOG Café](https://discord.gg/bT2HJ9k)), or email (shaikhsamit@live.com). I also use some python scripts to build and test the integration so if you want, you can use it as well (see top of [build.py](build.py)).
+
 ## Credits
 
 - Heavy inspiration from <https://github.com/FriendsOfGalaxy/galaxy-integration-minecraft>, the fork of: <https://github.com/TouwaStar/Galaxy_Plugin_Minecraft>
 - <https://github.com/tylerbrawl/Galaxy-Utils>
 - And of course: <https://github.com/gogcom/galaxy-integrations-python-api>
-
-## Development / Build Release
-
-- Build Release: `python3 build.py -r`
-- Test it in your own GOG Galaxy: `python3 build.py -d`
