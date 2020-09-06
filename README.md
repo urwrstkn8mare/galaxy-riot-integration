@@ -35,8 +35,11 @@ Any help (and feedback about this project) would be appreciated! If you want to 
 
 - [ ] Add Mac support
 - [x] ~~Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)~~
-- [ ] ~~Not require start menu shortcuts to be available.~~ (see this [issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/6))
+- [ ] Solve [Games don't show up as installed if I didn't enable shortcuts before installing. #6](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/6). (see [issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/6) for progress - I've made some progress alr)
+- [ ] [More precise game time #7](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/7)
 - [ ] Support friend recomendation and presence. (this may not be possible though)
+
+There may be more todos [here](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/todo).
 
 ## Credits
 
