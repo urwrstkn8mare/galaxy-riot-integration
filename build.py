@@ -1,10 +1,28 @@
-# Source: https://gist.github.com/urwrstkn8mare/78d8377562d8719f3bd1f72f9c4e7516
-# Just a python script I made to make testing plugins in GOG Galaxy easier as
-# well as building the final zip to release. The integration and its files must
-# be in a 'src' folder. Note: this works but the code is really bad pls don't judge.
-# If you want to improve it feel free to fork it or just leave a comment with suggestions.
+# Source:   https://gist.github.com/urwrstkn8mare/78d8377562d8719f3bd1f72f9c4e7516
+# Desc:     Just a python script I made to make 
+#           testing and building (to .zip)   
+#           integrations in GOG Galaxy easier.
+# Version:  v1.0.0
 
-# Usage: python build.py -h
+# Note:     this works but the code is not the best bad pls don't
+#           judge. If you want to improve it feel free to fork it 
+#           or just leave a comment with suggestions.
+
+# Usage:    The integration and its files must be in a 'src' folder.
+# 
+#           -h      See this.
+#           -d      Build for dev/testing in GOG Galaxy. Does not clean up but
+#                   automatically puts it in the GOG Galaxy installed folder.
+#           -r      Build release files (zips).
+#           -y      Say yes to any prompts.
+#           --out   Specify the output folder/directory.
+#           --plat  Specify the platform to be built for. Best to just use the
+#                   platform being built on.
+#
+#           You can only use one short option in a command. The program will use the
+#           one first in the order displayed above. Long options and -y will be used
+#           wherever applicable. Look at the code in build.py and the information at
+#           the top for more info.
 
 import sys, shutil, subprocess, os, glob, getopt, json
 
@@ -150,7 +168,7 @@ def main():
             print(
                 """
 Help (args):
-    -h      Get some help.
+    -h      See this.
     -d      Build for dev/testing in GOG Galaxy. Does not clean up but
             automatically puts it in the GOG Galaxy installed folder.
     -r      Build release files (zips).
@@ -162,6 +180,7 @@ You can only use one short option in a command. The program will use the
 one first in the order displayed above. Long options and -y will be used
 wherever applicable. Look at the code in build.py and the information at
 the top for more info.
+Note: The integration and its files must be in a 'src' folder.
                 """
             )
             return
