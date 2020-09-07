@@ -1,18 +1,23 @@
 # GOG Galaxy Riot Integration
 
-A GOG Galaxy 2.0 Community integration for Riot! You can download it from [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases). You can also install it using [scoop](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
-
-![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
+A GOG Galaxy 2.0 Community integration for Riot!
 
 [![v0.2.3](https://img.shields.io/badge/version-v0.2.3-blue)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
 [![MIT License](https://img.shields.io/github/license/urwrstkn8mare/galaxy-riot-integration)](https://github.com/urwrstkn8mare/galaxy-riot-integration/blob/master/LICENSE)
 [![v0.2.3 Downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/v0.2.3/total.svg)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
 
+![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
+
 _Note: If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594)._
 
-## Usage
+## Usage / Installation
 
-It's pretty simple. Just unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`. Make sure to delete any other versions of this integration first and quit GOG Galaxy.
+1. Download the latest release from [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases).
+2. Make sure to delete any other versions of this integration first and quit GOG Galaxy.
+3. Unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`.
+4. Go to GOG Galaxy, open settings, and then go to the integrations tab. You should see `Riot` in the list of integrations and just click `connect`.
+
+Alternatively you can install it easily using [scoop](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
 
 ## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
 
