@@ -16,7 +16,7 @@ It's pretty simple. Just unzip the file from [releases](https://github.com/urwrs
 
 ## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
 
-See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) in issues.
+See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) in [issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues). They will have the [known issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) [label](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels).
 
 ## Issues
 
@@ -29,26 +29,20 @@ When/if filing an issue please make sure to do the following:
 ## FAQ
 
 - _Game time doesn't show the time before I added the integration._
-  That's because Riot doesn't record gametime. The integration will only display gametime while you've launched it via GOG Galaxy 2.0 just like if you had added it manually.
+  That's because Riot doesn't record gametime. The integration will only display gametime while you've launched it via GOG Galaxy 2.0 just like if you had added it manually. (This may change, see this [todo](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/7).)
 
 ## Todo
 
-Any help (and feedback about this project) would be appreciated! See [Contributing](#contributing).
+Todos are found [here](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/todo) in [issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues). They have the [todo](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/todo) [label](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels).
 
-- [ ] Add Mac support
-- [x] ~~Automatically determine path to `RiotClientServices.exe`. (need to parse target path from Windows shortcuts. spoiler alert - it's hard)~~
-- [ ] Solve [Games don't show up as installed if I didn't enable shortcuts before installing. #6](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/6). (see [issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/6) for progress - I've made some progress alr)
-- [ ] [More precise game time #7](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/7)
-- [ ] Support friend recomendation and presence. (this may not be possible though)
-
-There may be more todos [here](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/todo).
+Any help (and feedback about this project) would be appreciated! See [Contributing](#contributing) for more info.
 
 ## Contributing
 
-Thanks in advance if you want to contribute! Feel free to complete and [todos](#todo) for me or add anything else you wanted to add. Then just submit a [pull request](https://github.com/urwrstkn8mare/galaxy-riot-integration/pulls)! If you don't understand something about the integration (eg. a part of the code - it may be hard to read sometimes) then feel free to ask me. You can do that via an issue, Discord ([GOG Café](https://discord.gg/bT2HJ9k)), or email (shaikhsamit@live.com). I also use some python scripts to build and test the integration so if you want, you can use it as well (see top of [build.py](build.py)).
+Thanks in advance if you want to contribute! Feel free to complete any [todos](#todo) for me or add anything else you want to add. Then just submit a [pull request](https://github.com/urwrstkn8mare/galaxy-riot-integration/pulls)! If you don't understand something about the integration (eg. a part of the code - it may be hard to read sometimes) then please feel free to ask me. You can do that via an issue, Discord ([GOG Café](https://discord.gg/bT2HJ9k)), or email (shaikhsamit@live.com). I also use some python scripts to build and test the integration so if you want, you can use it as well (see top of [build.py](build.py) for more information about how to use it and more).
 
 ## Credits
 
-- Heavy inspiration from <https://github.com/FriendsOfGalaxy/galaxy-integration-minecraft>, the fork of: <https://github.com/TouwaStar/Galaxy_Plugin_Minecraft>
+- Heavy inspiration from: <https://github.com/TouwaStar/Galaxy_Plugin_Minecraft>
 - <https://github.com/tylerbrawl/Galaxy-Utils>
 - And of course: <https://github.com/gogcom/galaxy-integrations-python-api>
