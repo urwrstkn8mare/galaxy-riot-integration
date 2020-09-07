@@ -5,7 +5,7 @@ A GOG Galaxy 2.0 Community integration for Riot! You can download it from [relea
 ![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
 
 [![version](https://img.shields.io/badge/version-v0.2.3-blue)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
-[![latest downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/latest/galaxy-riot-integration-windows.zip)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
+[![latest downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/v0.2.3/total.svg)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
 
 _Note: If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594)._
 
