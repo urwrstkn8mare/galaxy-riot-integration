@@ -17,7 +17,9 @@ _Note: If you're wondering why the icon is odd (missing) see this [issue](https:
 3. Unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`.
 4. Go to GOG Galaxy, open settings, and then go to the integrations tab. You should see `Riot` in the list of integrations and just click `connect`.
 
-Alternatively you can install it easily using [scoop](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
+### Alternatives
+- Alternatively you can install it easily using [scoop](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
+- You can also use [Slashbunny](https://github.com/Slashbunny)'s [GOG Galaxy Plugins Downloader](https://github.com/Slashbunny/gog-galaxy-plugin-downloader). 
 
 ## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
 
