@@ -2,7 +2,7 @@ import json, os, winreg
 
 from yaml import load, FullLoader
 
-import utils
+import utils.misc
 from consts import (
     GameID,
     GAME_IDS,
@@ -36,7 +36,7 @@ class LocalClient:
         return self.install_location[game_id] is not None
 
     def launch(self, game_id, *, save_process=True):
-        p = utils.open_path(
+        p = utils.misc.open_path(
             self.riot_client_services_path,
             [f"--launch-product={game_id}", "--launch-patchline=live"],
         )
@@ -45,15 +45,15 @@ class LocalClient:
         return p
 
     def uninstall(self, game_id):
-        utils.open_path(
+        utils.misc.open_path(
             self.riot_client_services_path,
             [f"--uninstall-product={game_id}", "--uninstall-patchline=live"],
         )
 
     def update_installed(self):
-        # Try to locate Riot Client Services using the settings yaml file.
+        # Try to locate Riot Client Services using the settings json file.
         try:
-            with open(utils.get_riot_client_installs_path(), 'r') as file:
+            with open(utils.misc.get_riot_client_installs_path(), 'r') as file:
                 client_installs = json.load(file)
                 self.riot_client_services_path = os.path.abspath(client_installs['rc_default'])
         except:
@@ -79,7 +79,7 @@ class LocalClient:
             # Read product_install_full_path from yaml.
             else:
                 try:
-                    with open(utils.get_product_settings_path(game_id), 'r') as file:
+                    with open(utils.misc.get_product_settings_path(game_id), 'r') as file:
                         product_settings = load(file, Loader=FullLoader)
                         install_path = product_settings['product_install_full_path']
                         self.install_location[game_id] = os.path.abspath(
