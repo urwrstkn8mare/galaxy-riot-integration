@@ -1,26 +1,27 @@
-import winreg
+import json, os, winreg
 
-import os
+from yaml import load, FullLoader
 
+import utils
 from consts import (
     GameID,
     GAME_IDS,
     REGISTRY_START_PATHS,
     SOFTWARE_PATHS,
     UNINSTALL_REGISTRY_PATH,
-    GAME_REGISTY_PATH,
+    GAME_REGISTRY_PATH,
     UNINSTALL_STRING_KEY,
     INSTALL_LOCATION_KEY,
 )
-import utils
 
 
 class LocalClient:
     def __init__(self):
         self.process = dict.fromkeys(GAME_IDS, None)
-        self.install_location = dict.fromkeys(list(GAME_REGISTY_PATH.keys()), None)
+        self.install_location = dict.fromkeys(
+            list(GAME_REGISTRY_PATH.keys()), None)
         self.riot_client_services_path = None
-        self._vangaurd_uninstall_path = None
+        self._vanguard_uninstall_path = None
 
     def game_running(self, game_id) -> bool:
         rp = self.process[game_id]  # Just an alias
@@ -50,54 +51,38 @@ class LocalClient:
         )
 
     def update_installed(self):
-        def get_riot_client_services_path_from_cmd(cmd):
-            pth = ""
-            found_char = False
-            for char in cmd.strip():
-                if char == '"':
-                    if found_char:
-                        break
-                    else:
-                        found_char = True
-                elif found_char:
-                    pth += char
-            return pth
+        # Try to locate Riot Client Services using the settings yaml file.
+        try:
+            with open(utils.get_riot_client_installs_path(), 'r') as file:
+                client_installs = json.load(file)
+                self.riot_client_services_path = os.path.abspath(client_installs['rc_default'])
+        except:
+            pass
 
-        games = list(GAME_REGISTY_PATH.keys())
-        if self.riot_client_services_path is not None and not os.path.isfile(
-            self.riot_client_services_path
-        ):
+        if self.riot_client_services_path is not None and not os.path.isfile(self.riot_client_services_path):
             self.riot_client_services_path = None
-        self._vangaurd_uninstall_path = None
-        for start_path in REGISTRY_START_PATHS:
-            for software_path in SOFTWARE_PATHS:
-                for game_id in games.copy():
-                    try:
-                        reg = winreg.ConnectRegistry(None, start_path)
-                        with winreg.OpenKey(
-                            reg,
-                            software_path + UNINSTALL_REGISTRY_PATH + GAME_REGISTY_PATH[game_id],
-                        ) as key:
-                            if (
-                                game_id != GameID.vanguard
-                                and self.riot_client_services_path is None
-                            ):
-                                path = get_riot_client_services_path_from_cmd(
-                                    winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0]
-                                )
-                                if not os.path.isfile(path):
-                                    path = None
-                                self.riot_client_services_path = path
-                            elif game_id == GameID.vanguard:
-                                self._vangaurd_uninstall_path = os.path.abspath(
-                                    winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0].strip('"')
-                                )
-                            self.install_location[game_id] = os.path.abspath(
-                                winreg.QueryValueEx(key, INSTALL_LOCATION_KEY)[0]
-                            )
-                    except OSError:
-                        continue
-                    else:
-                        games.remove(game_id)
-        for game_id in games:
-            self.install_location[game_id] = None
+        self._vanguard_uninstall_path = None
+
+        for game_id in GAME_IDS:
+            # Vanguard doesn't have a settings.yaml file. Need to use old registry method.
+            if game_id == GameID.vanguard:
+                for start_path in REGISTRY_START_PATHS:
+                    for software_path in SOFTWARE_PATHS:
+                        try:
+                            reg = winreg.ConnectRegistry(None, start_path)
+                            with winreg.OpenKey(reg, software_path + UNINSTALL_REGISTRY_PATH + GAME_REGISTRY_PATH[game_id]) as key:
+                                self._vanguard_uninstall_path = os.path.abspath(
+                                    winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0].strip('"'))
+                        except OSError:
+                            log.error(OSError)
+                            continue
+            # Read product_install_full_path from yaml.
+            else:
+                try:
+                    with open(utils.get_product_settings_path(game_id), 'r') as file:
+                        product_settings = load(file, Loader=FullLoader)
+                        install_path = product_settings['product_install_full_path']
+                        self.install_location[game_id] = os.path.abspath(
+                            install_path)
+                except:
+                    self.install_location[game_id] = None

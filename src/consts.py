@@ -9,10 +9,11 @@ class GameID:
 
 
 GAME_IDS = [GameID.legends_of_runeterra, GameID.league_of_legends, GameID.valorant]
+# Registry info is still needed to detect Vanguard.
 REGISTRY_START_PATHS = [winreg.HKEY_CURRENT_USER, winreg.HKEY_LOCAL_MACHINE]
 SOFTWARE_PATHS = ["SOFTWARE\\", "SOFTWARE\\WOW6432Node\\"]
 UNINSTALL_REGISTRY_PATH = "Microsoft\\Windows\\CurrentVersion\\Uninstall\\"
-GAME_REGISTY_PATH = {
+GAME_REGISTRY_PATH = {
     GameID.league_of_legends: "Riot Game league_of_legends.live",
     GameID.legends_of_runeterra: "Riot Game bacon.live",
     GameID.valorant: "Riot Game valorant.live",

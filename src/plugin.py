@@ -81,8 +81,8 @@ class RiotPlugin(Plugin):
     async def uninstall_game(self, game_id):
         self.local_client.update_installed()
         self.local_client.uninstall(game_id)
-        if game_id == GameID.valorant and self.local_client._vangaurd_uninstall_path is not None:
-            utils.open_path(self.local_client._vangaurd_uninstall_path)
+        if game_id == GameID.valorant and self.local_client._vanguard_uninstall_path is not None:
+            utils.open_path(self.local_client._vanguard_uninstall_path)
 
     async def launch_game(self, game_id):
         self.local_client.update_installed()
