@@ -20,7 +20,9 @@ class LocalClient:
         self.process = dict.fromkeys(GAME_IDS, None)
         self.install_location = dict.fromkeys(
             list(GAME_REGISTRY_PATH.keys()), None)
-        self.riot_client_services_path = None
+        self.riot_client_services_path = self.get_rcs_path()
+        if not os.path.isfile(self.riot_client_services_path):
+            self.riot_client_services_path = None
         self._vanguard_uninstall_path = None
 
     def game_running(self, game_id) -> bool:
@@ -51,16 +53,8 @@ class LocalClient:
         )
 
     def update_installed(self):
-        # Try to locate Riot Client Services using the settings json file.
-        try:
-            with open(utils.misc.get_riot_client_installs_path(), 'r') as file:
-                client_installs = json.load(file)
-                self.riot_client_services_path = os.path.abspath(client_installs['rc_default'])
-        except:
-            pass
-
-        if self.riot_client_services_path is not None and not os.path.isfile(self.riot_client_services_path):
-            self.riot_client_services_path = None
+        if self.riot_client_services_path == None:
+            self.riot_client_services_path = self.get_rcs_path()
         self._vanguard_uninstall_path = None
 
         for game_id in GAME_IDS:
@@ -86,3 +80,13 @@ class LocalClient:
                             install_path)
                 except:
                     self.install_location[game_id] = None
+
+    def get_rcs_path(self):
+        try:
+            with open(utils.misc.get_riot_client_installs_path(), 'r') as file:
+                client_installs = json.load(file)
+                rcs_path = os.path.abspath(client_installs['rc_default'])
+        except:
+            rcs_path = None
+            pass
+        return rcs_path
