@@ -18,8 +18,7 @@ from consts import (
 class LocalClient:
     def __init__(self):
         self.process = dict.fromkeys(GAME_IDS, None)
-        self.install_location = dict.fromkeys(
-            list(GAME_REGISTRY_PATH.keys()), None)
+        self.install_location = dict.fromkeys(list(GAME_REGISTRY_PATH.keys()), None)
         self.riot_client_services_path = self.get_rcs_path()
         if not os.path.isfile(self.riot_client_services_path):
             self.riot_client_services_path = None
@@ -64,28 +63,33 @@ class LocalClient:
                     for software_path in SOFTWARE_PATHS:
                         try:
                             reg = winreg.ConnectRegistry(None, start_path)
-                            with winreg.OpenKey(reg, software_path + UNINSTALL_REGISTRY_PATH + GAME_REGISTRY_PATH[game_id]) as key:
+                            with winreg.OpenKey(
+                                reg,
+                                software_path
+                                + UNINSTALL_REGISTRY_PATH
+                                + GAME_REGISTRY_PATH[game_id],
+                            ) as key:
                                 self._vanguard_uninstall_path = os.path.abspath(
-                                    winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0].strip('"'))
+                                    winreg.QueryValueEx(key, UNINSTALL_STRING_KEY)[0].strip('"')
+                                )
                         except OSError:
                             log.error(OSError)
                             continue
             # Read product_install_full_path from yaml.
             else:
                 try:
-                    with open(utils.misc.get_product_settings_path(game_id), 'r') as file:
+                    with open(utils.misc.get_product_settings_path(game_id), "r") as file:
                         product_settings = load(file, Loader=FullLoader)
-                        install_path = product_settings['product_install_full_path']
-                        self.install_location[game_id] = os.path.abspath(
-                            install_path)
+                        install_path = product_settings["product_install_full_path"]
+                        self.install_location[game_id] = os.path.abspath(install_path)
                 except:
                     self.install_location[game_id] = None
 
     def get_rcs_path(self):
         try:
-            with open(utils.misc.get_riot_client_installs_path(), 'r') as file:
+            with open(utils.misc.get_riot_client_installs_path(), "r") as file:
                 client_installs = json.load(file)
-                rcs_path = os.path.abspath(client_installs['rc_default'])
+                rcs_path = os.path.abspath(client_installs["rc_default"])
         except:
             rcs_path = None
             pass

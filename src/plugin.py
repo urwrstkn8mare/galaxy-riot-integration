@@ -52,7 +52,12 @@ class RiotPlugin(Plugin):
                 None,
                 LicenseInfo(LicenseType.FreeToPlay),
             ),
-            Game(GameID.valorant, "Valorant", None, LicenseInfo(LicenseType.FreeToPlay),),
+            Game(
+                GameID.valorant,
+                "Valorant",
+                None,
+                LicenseInfo(LicenseType.FreeToPlay),
+            ),
         ]
 
     async def get_local_games(self):
@@ -85,7 +90,7 @@ class RiotPlugin(Plugin):
             utils.misc.open_path(self.local_client._vanguard_uninstall_path)
 
     async def launch_game(self, game_id):
-        log.debug("RCS location: "+ self.local_client.riot_client_services_path)
+        log.debug("RCS location: " + self.local_client.riot_client_services_path)
         self.local_client.update_installed()
         self.local_client.launch(game_id)
 

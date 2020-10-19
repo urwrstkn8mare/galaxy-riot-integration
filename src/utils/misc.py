@@ -20,13 +20,20 @@ async def get_size_at_path(start_path, *, if_none=None):
     log.debug(f"Size: {total_size} bytes - {start_path}")
     return total_size  # in bytes
 
+
 def get_product_settings_path(game_id):
     # Given the game ID, returns the path of the product settings yaml file.
-    return os.path.expandvars("%PROGRAMDATA%\\Riot Games\\Metadata\\{0}.live\\{0}.live.product_settings.yaml".format(game_id))
+    return os.path.expandvars(
+        "%PROGRAMDATA%\\Riot Games\\Metadata\\{0}.live\\{0}.live.product_settings.yaml".format(
+            game_id
+        )
+    )
+
 
 def get_riot_client_installs_path():
     # Returns the path of the Riot Client settings yaml file.
     return os.path.expandvars("%PROGRAMDATA%\\Riot Games\\RiotClientInstalls.json")
+
 
 def run(cmd, *, shell=False):
     log.info(f"Running: {cmd}")
