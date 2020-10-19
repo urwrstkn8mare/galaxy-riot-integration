@@ -1,4 +1,5 @@
-import os, asyncio, logging, subprocess, tempfile
+import os, asyncio, logging, subprocess, tempfile, multiprocessing
+from types import FunctionType
 
 import requests
 
@@ -30,11 +31,6 @@ def get_product_settings_path(game_id):
     )
 
 
-def get_riot_client_installs_path():
-    # Returns the path of the Riot Client settings yaml file.
-    return os.path.expandvars("%PROGRAMDATA%\\Riot Games\\RiotClientInstalls.json")
-
-
 def run(cmd, *, shell=False):
     log.info(f"Running: {cmd}")
     return subprocess.Popen(cmd, shell=shell)
@@ -46,16 +42,29 @@ def open_path(path, args=[]):
     return run(cmd)
 
 
-async def download(url) -> str:
-    def _download():
-        log.info(f"Downloading: {url}")
-        r = requests.get(url)
-        download_path = os.path.join(tempfile.gettempdir(), url.split("/")[-1])
-        with open(download_path, "wb") as f:
-            f.write(r.content)
-        return download_path
+PROCESSES = []
 
-    return await asyncio.get_running_loop().run_in_executor(None, _download)
+
+def _download(u, c):
+    r = requests.get(u)
+    download_path = os.path.join(tempfile.gettempdir(), u.split("/")[-1])
+    with open(download_path, "wb") as f:
+        f.write(r.content)
+    c(download_path)
+
+
+def download(url, callback: FunctionType):
+    log.info(f"Downloading: {url}")
+
+    proc = multiprocessing.Process(target=_download, args=(url, callback))
+    proc.start()
+    PROCESSES.append(proc)
+    return proc
+
+
+def kill_all_processes():
+    for proc in PROCESSES:
+        proc.terminate()
 
 
 def cleanup():  # Clean up files created by/for earlier version of the plugin not needed anymore

@@ -86,8 +86,6 @@ class RiotPlugin(Plugin):
     async def uninstall_game(self, game_id):
         self.local_client.update_installed()
         self.local_client.uninstall(game_id)
-        if game_id == GameID.valorant and self.local_client._vanguard_uninstall_path is not None:
-            misc.open_path(self.local_client._vanguard_uninstall_path)
 
     async def launch_game(self, game_id):
         log.debug("RCS location: " + self.local_client.riot_client_services_path)
@@ -107,7 +105,7 @@ class RiotPlugin(Plugin):
         log.info("Installing game")
         self.local_client.update_installed()
         if self.local_client.riot_client_services_path is None:
-            misc.open_path(misc.download(DOWNLOAD_URL[game_id]))
+            misc.download(DOWNLOAD_URL[game_id], misc.open_path)
         else:
             self.local_client.launch(game_id, save_process=False)
 
@@ -168,6 +166,7 @@ class RiotPlugin(Plugin):
         self.game_time_tracker = time_tracker.TimeTracker(game_time_cache=self.game_time_cache)
 
     async def shutdown(self):
+        misc.kill_all_processes()
         for game_id in self.game_time_tracker.get_tracking_games():
             self.game_time_tracker.stop_tracking_game(game_id)
         if self.game_time_cache is not None:

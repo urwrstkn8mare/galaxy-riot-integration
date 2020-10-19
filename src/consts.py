@@ -29,3 +29,8 @@ DOWNLOAD_URL = {
 LOCAL_FILE_CACHE = os.path.expandvars(
     "%LOCALAPPDATA%\\GOG.com\\Galaxy\\plugins\\installed\\riot_play_time_cache.txt"
 )
+
+# path of the Riot Client settings yaml file.
+RIOT_CLIENT_INSTALLS_PATH = os.path.expandvars("%PROGRAMDATA%\\Riot Games\\RiotClientInstalls.json")
+
+VANGUARD_INSTALL_LOCATION = os.path.abspath(os.path.expandvars("%programfiles%/Riot Vanguard"))
