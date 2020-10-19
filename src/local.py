@@ -1,4 +1,4 @@
-import json, os, winreg
+import json, os, winreg, logging
 
 from yaml import load, FullLoader
 
@@ -11,8 +11,9 @@ from consts import (
     UNINSTALL_REGISTRY_PATH,
     GAME_REGISTRY_PATH,
     UNINSTALL_STRING_KEY,
-    INSTALL_LOCATION_KEY,
 )
+
+log = logging.getLogger(__name__)
 
 
 class LocalClient:
@@ -20,8 +21,6 @@ class LocalClient:
         self.process = dict.fromkeys(GAME_IDS, None)
         self.install_location = dict.fromkeys(list(GAME_REGISTRY_PATH.keys()), None)
         self.riot_client_services_path = self.get_rcs_path()
-        if not os.path.isfile(self.riot_client_services_path):
-            self.riot_client_services_path = None
         self._vanguard_uninstall_path = None
 
     def game_running(self, game_id) -> bool:
@@ -52,7 +51,7 @@ class LocalClient:
         )
 
     def update_installed(self):
-        if self.riot_client_services_path == None:
+        if self.riot_client_services_path is None:
             self.riot_client_services_path = self.get_rcs_path()
         self._vanguard_uninstall_path = None
 
@@ -82,7 +81,7 @@ class LocalClient:
                         product_settings = load(file, Loader=FullLoader)
                         install_path = product_settings["product_install_full_path"]
                         self.install_location[game_id] = os.path.abspath(install_path)
-                except:
+                except FileNotFoundError:
                     self.install_location[game_id] = None
 
     def get_rcs_path(self):
@@ -90,7 +89,8 @@ class LocalClient:
             with open(misc.get_riot_client_installs_path(), "r") as file:
                 client_installs = json.load(file)
                 rcs_path = os.path.abspath(client_installs["rc_default"])
-        except:
-            rcs_path = None
-            pass
-        return rcs_path
+                if not os.access(rcs_path, os.X_OK):
+                    return None
+                return rcs_path
+        except FileNotFoundError:
+            return None
