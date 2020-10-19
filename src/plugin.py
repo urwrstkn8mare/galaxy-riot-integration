@@ -14,7 +14,7 @@ from galaxyutils import time_tracker
 
 from consts import GameID, DOWNLOAD_URL, GAME_IDS, LOCAL_FILE_CACHE
 from local import LocalClient
-import utils.misc
+from utils import misc
 from version import __version__
 
 log = logging.getLogger(__name__)
@@ -68,11 +68,11 @@ class RiotPlugin(Plugin):
     async def prepare_local_size_context(self, game_ids):
         sizes = []
         for game_id in GAME_IDS:
-            size = await utils.misc.get_size_at_path(
+            size = await misc.get_size_at_path(
                 self.local_client.install_location[game_id], if_none=0
             )
             if game_id == GameID.valorant:
-                size += await utils.misc.get_size_at_path(
+                size += await misc.get_size_at_path(
                     self.local_client.install_location[GameID.vanguard], if_none=0
                 )
             if size == 0:
@@ -87,7 +87,7 @@ class RiotPlugin(Plugin):
         self.local_client.update_installed()
         self.local_client.uninstall(game_id)
         if game_id == GameID.valorant and self.local_client._vanguard_uninstall_path is not None:
-            utils.misc.open_path(self.local_client._vanguard_uninstall_path)
+            misc.open_path(self.local_client._vanguard_uninstall_path)
 
     async def launch_game(self, game_id):
         log.debug("RCS location: " + self.local_client.riot_client_services_path)
@@ -107,7 +107,7 @@ class RiotPlugin(Plugin):
         log.info("Installing game")
         self.local_client.update_installed()
         if self.local_client.riot_client_services_path is None:
-            utils.misc.open_path(utils.misc.download(DOWNLOAD_URL[game_id]))
+            misc.open_path(misc.download(DOWNLOAD_URL[game_id]))
         else:
             self.local_client.launch(game_id, save_process=False)
 
@@ -151,7 +151,7 @@ class RiotPlugin(Plugin):
             return None
 
     def handshake_complete(self):
-        utils.misc.cleanup()
+        misc.cleanup()
         if "game_time_cache" in self.persistent_cache:
             self.game_time_cache = pickle.loads(
                 bytes.fromhex(self.persistent_cache["game_time_cache"])
