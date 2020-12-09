@@ -2,9 +2,9 @@
 
 A GOG Galaxy 2.0 Community integration for Riot!
 
-[![v0.2.4](https://img.shields.io/badge/version-v0.2.4-blue)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
+[![v0.2.4](https://img.shields.io/badge/version-v0.2.4-blue)](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases/tag/v0.2.4)
 [![MIT License](https://img.shields.io/github/license/urwrstkn8mare/galaxy-riot-integration)](https://github.com/urwrstkn8mare/galaxy-riot-integration/blob/master/LICENSE)
-[![v0.2.4 Downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/v0.2.4/total.svg)](https://GitHub.com/urwrstkn8mare/galaxy-riot-integration/releases/)
+[![v0.2.4 Downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/v0.2.4/total.svg)](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases/tag/v0.2.4)
 
 ![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
 
@@ -46,7 +46,7 @@ Any help (and feedback about this project) would be appreciated! See [Contributi
 
 ## Contributing
 
-Thanks in advance if you want to contribute! Feel free to complete any [todos](#todo) for me or add anything else you want to add. Then just submit a [pull request](https://github.com/urwrstkn8mare/galaxy-riot-integration/pulls)! If you don't understand something about the integration (eg. a part of the code - it may be hard to read sometimes) then please feel free to ask me. You can do that via an [issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/new), Discord ([GOG Café](https://discord.gg/bT2HJ9k)), or email (shaikhsamit@live.com). I also use some python scripts to build and test the integration so if you want, you can use it as well (see top of [build.py](build.py) for more information about how to use it and more).
+Thanks in advance if you want to contribute! Feel free to complete any [todos](#todo) for me or add anything else you want to add. Then just submit a [pull request](https://github.com/urwrstkn8mare/galaxy-riot-integration/pulls)! If you don't understand something about the integration (eg. a part of the code - it may be hard to read sometimes) then please feel free to ask me. You can do that via an [issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/new), Discord ([GOG Café](https://discord.gg/bT2HJ9k)), or email (shaikhsamit@live.com). I also use some python scripts to build and test the integration so if you want, you can use it as well (see [top of build.py](tasks.py#L1-L10) for more information about how to use it and more).
 
 ## Credits
 
