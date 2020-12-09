@@ -62,8 +62,7 @@ class RiotPlugin(Plugin):
 
     async def get_local_games(self):
         log.info("Getting local games")
-        out = [LocalGame(key, self.status[key]) for key in self.status.keys()]
-        return out
+        return [LocalGame(k, v) for k,v in self.status.items()]
 
     async def prepare_local_size_context(self, game_ids):
         sizes = []
@@ -133,7 +132,7 @@ class RiotPlugin(Plugin):
         log.debug(f"self.local_client.install_location: {self.local_client.install_location}")
         log.debug(f"self.status: {self.status}")
 
-        await asyncio.sleep(0)
+        await asyncio.sleep(5)
 
     def tick(self):
         if self._update_task is None or self._update_task.done():

@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "==2.22.0"
+"galaxy.plugin.api" = "==0.67.0"
+galaxyutils = "==0.1.5"
+PyYAML = "==5.3.1"
+
+[dev-packages]
+pip-tools = "==5.3.1"
+colorama = "==0.4.3"
+
+
+[requires]
+python_version = "3.8"
