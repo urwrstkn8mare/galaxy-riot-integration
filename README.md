@@ -8,8 +8,6 @@ A GOG Galaxy 2.0 Community integration for Riot!
 
 ![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
 
-_Note: If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594)._
-
 ## Usage / Installation
 
 1. Download the latest release from [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases).
@@ -24,6 +22,10 @@ _Note: If you're wondering why the icon is odd (missing) see this [issue](https:
 ## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
 
 See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) in [issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues). They will have the [known issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) [label](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels).
+
+Note: 
+- If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594).
+- If you used the Rockstar plugin before or currently and are experiencing issues (like plugin not starting on client launch) see [this issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/13#issuecomment-757138499) for a solution. (courtesy of [@fl4shback](https://github.com/fl4shback))
 
 ## Issues
 
