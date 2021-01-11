@@ -67,6 +67,8 @@ def build(c, output="build", ziparchive=None):
         '--target "{}"'.format(output),
         "--no-compile",
         "--no-deps",
+        "--implementation",
+        "cp"
     ]
     c.run(" ".join(args), echo=True)
     os.unlink(tmp.name)
