@@ -62,7 +62,13 @@ class RiotPlugin(Plugin):
 
     async def get_local_games(self):
         log.info("Getting local games")
-        return [LocalGame(k, v) for k,v in self.status.items()]
+        local_games = []
+        for game_id in GAME_IDS:
+            if self.local_client.game_installed(game_id):
+                local_game = LocalGame(game_id, LocalGameState.Installed)
+                local_games.append(local_game)
+        log.debug(f"RIOT_INSTALLED_GAMES: {local_games}")
+        return local_games
 
     async def prepare_local_size_context(self, game_ids):
         sizes = []
