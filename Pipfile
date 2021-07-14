@@ -7,7 +7,7 @@ name = "pypi"
 requests = "==2.22.0"
 "galaxy.plugin.api" = "==0.68.0"
 galaxyutils = "==0.1.5"
-PyYAML = "==5.3.1"
+PyYAML = "==5.4"
 
 [dev-packages]
 colorama = "==0.4.3"
