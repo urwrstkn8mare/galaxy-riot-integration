@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "==2.22.0"
+"galaxy.plugin.api" = "==0.67.0"
+galaxyutils = "==0.1.5"
+PyYAML = "==5.3.1"
+
+[dev-packages]
+colorama = "==0.4.3"
+invoke = "==1.4.1"
+black = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+hotfix = "inv hotfix"
+install = "inv install"
+pack = "inv pack"
