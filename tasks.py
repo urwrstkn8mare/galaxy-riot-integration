@@ -41,26 +41,24 @@ RELEASE_DIR = "releases"
 
 
 def print_task(string):
-    print(colorama.Fore.CYAN + string)
+    print(f"{colorama.Fore.CYAN}--> {string}")
     print(colorama.Style.RESET_ALL)
 
 
 @task
 def build(c, output="build", ziparchive=None):
     if os.path.exists(output):
-        print_task("--> Removing {} directory".format(output))
+        print_task(f"Removing {output} directory")
         rmtree(output)
 
     # Firstly dependencies needs to be "flatten" with pip-compile
     # as pip requires --no-deps if --platform is used
-    print_task(
-        "--> Flattening dependencies to temporary requirements file from Pipfile"
-    )
+    print_task("Flattening dependencies to temporary requirements file from Pipfile")
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as tmp:
         c.run("pipenv lock -r", out_stream=tmp)
 
     # Then install all stuff with pip to output folder
-    print_task("--> Installing with pip for specific version")
+    print_task("Installing with pip for specific version")
     args = [
         "pip",
         "install",
@@ -79,11 +77,11 @@ def build(c, output="build", ziparchive=None):
     c.run(" ".join(args), echo=True)
     os.unlink(tmp.name)
 
-    print_task("--> Copying source files")
+    print_task(f"Copying source files to {output}")
     copy_tree("src", output)
 
     if ziparchive is not None:
-        print_task("--> Compressing to {}".format(ziparchive))
+        print_task(f"Compressing to {ziparchive}")
         zip_folder_to_file(output, ziparchive)
 
 
@@ -93,6 +91,7 @@ def hotfix(c):
     # plugin has crashed and you want to update it without having to restart GOG
     # Galaxy or disconnect the plugin
     dist_path = os.path.join(DIST_DIR, f"{MANIFEST['platform']}_{MANIFEST['guid']}")
+    print_task(f"Copying source files to {dist_path}")
     copy_tree("src", dist_path)
 
 
