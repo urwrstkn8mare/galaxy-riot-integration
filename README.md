@@ -2,9 +2,9 @@
 
 A GOG Galaxy 2.0 Community integration for Riot!
 
-[![v0.2.4](https://img.shields.io/badge/version-v0.2.4-blue)](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases/tag/v0.2.4)
+[![v0.2.5](https://img.shields.io/badge/version-v0.2.5-blue)](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases/tag/v0.2.5)
 [![MIT License](https://img.shields.io/github/license/urwrstkn8mare/galaxy-riot-integration)](https://github.com/urwrstkn8mare/galaxy-riot-integration/blob/master/LICENSE)
-[![v0.2.4 Downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/v0.2.4/total.svg)](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases/tag/v0.2.4)
+[![v0.2.5 Downloads](https://img.shields.io/github/downloads/urwrstkn8mare/galaxy-riot-integration/v0.2.5/total.svg)](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases/tag/v0.2.5)
 
 ![games_example](https://raw.githubusercontent.com/urwrstkn8mare/gog-riot-integration/master/screenshot.png)
 
