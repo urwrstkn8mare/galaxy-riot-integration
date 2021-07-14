@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "==2.22.0"
-"galaxy.plugin.api" = "==0.67.0"
+"galaxy.plugin.api" = "==0.68.0"
 galaxyutils = "==0.1.5"
 PyYAML = "==5.3.1"
 
