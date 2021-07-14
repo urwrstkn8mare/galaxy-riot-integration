@@ -24,14 +24,6 @@ A GOG Galaxy 2.0 Community integration for Riot!
 
 See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues?q=label%3A%22known+issue%22+) in [issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues). They will have the [known issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues?q=label%3A%22known+issue%22+) [label](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels).
 
-Note: 
-- If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594).
-- If you used the Rockstar plugin before or currently and are experiencing issues (like plugin not starting on client launch) see [this issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/13#issuecomment-757138499) for a solution. (courtesy of [@fl4shback](https://github.com/fl4shback))
-
-Note: 
-- If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594).
-- If you used the Rockstar plugin before or currently and are experiencing issues (like plugin not starting on client launch) see [this issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues/13#issuecomment-757138499) for a solution. (courtesy of [@fl4shback](https://github.com/fl4shback))
-
 ## Issues
 
 When/if filing an issue please make sure to do the following:
