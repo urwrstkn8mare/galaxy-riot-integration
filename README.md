@@ -16,12 +16,13 @@ A GOG Galaxy 2.0 Community integration for Riot!
 4. Go to GOG Galaxy, open settings, and then go to the integrations tab. You should see `Riot` in the list of integrations and just click `connect`.
 
 ### Alternatives
+
 - Alternatively you can install it easily using [scoop](https://scoop.sh/) using this [bucket](https://github.com/borger/scoop-galaxy-integrations) by [borger](https://github.com/borger).
-- You can also use [Slashbunny](https://github.com/Slashbunny)'s [GOG Galaxy Plugins Downloader](https://github.com/Slashbunny/gog-galaxy-plugin-downloader). 
+- You can also use [Slashbunny](https://github.com/Slashbunny)'s [GOG Galaxy Plugins Downloader](https://github.com/Slashbunny/gog-galaxy-plugin-downloader).
 
-## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue)
+## [Known Issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues?q=label%3A%22known+issue%22+)
 
-See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) in [issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues). They will have the [known issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels/known%20issue) [label](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels).
+See [known issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues?q=label%3A%22known+issue%22+) in [issues](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues). They will have the [known issue](https://github.com/urwrstkn8mare/galaxy-riot-integration/issues?q=label%3A%22known+issue%22+) [label](https://github.com/urwrstkn8mare/galaxy-riot-integration/labels).
 
 Note: 
 - If you're wondering why the icon is odd (missing) see this [issue](https://github.com/urwrstkn8mare/gog-riot-integration/issues/1#issuecomment-641019594).
