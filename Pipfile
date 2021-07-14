@@ -21,3 +21,8 @@ python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true
+
+[scripts]
+hotfix = "inv hotfix"
+install = "inv install"
+pack = "inv pack"

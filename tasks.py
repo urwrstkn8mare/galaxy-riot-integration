@@ -31,8 +31,11 @@ if sys.platform == "win32":
     DIST_DIR = os.environ["localappdata"] + "\\GOG.com\\Galaxy\\plugins\\installed"
     PIP_PLATFORM = "win32"
 elif sys.platform == "darwin":
-    DIST_DIR = os.path.realpath("~/Library/Application Support/GOG.com/Galaxy/plugins/installed")
-    PIP_PLATFORM = "macosx_10_13_x86_64"  # @see https://github.com/FriendsOfGalaxy/galaxy-integrations-updater/blob/master/scripts.py
+    DIST_DIR = os.path.realpath(
+        "~/Library/Application Support/GOG.com/Galaxy/plugins/installed"
+    )
+    PIP_PLATFORM = "macosx_10_13_x86_64"
+    # @see https://github.com/FriendsOfGalaxy/galaxy-integrations-updater/blob/master/scripts.py
 
 RELEASE_DIR = "releases"
 
@@ -48,8 +51,11 @@ def build(c, output="build", ziparchive=None):
         print_task("--> Removing {} directory".format(output))
         rmtree(output)
 
-    # Firstly dependencies needs to be "flatten" with pip-compile as pip requires --no-deps if --platform is used
-    print_task("--> Flattening dependencies to temporary requirements file from Pipfile")
+    # Firstly dependencies needs to be "flatten" with pip-compile
+    # as pip requires --no-deps if --platform is used
+    print_task(
+        "--> Flattening dependencies to temporary requirements file from Pipfile"
+    )
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as tmp:
         c.run("pipenv lock -r", out_stream=tmp)
 
@@ -68,7 +74,7 @@ def build(c, output="build", ziparchive=None):
         "--no-compile",
         "--no-deps",
         "--implementation",
-        "cp"
+        "cp",
     ]
     c.run(" ".join(args), echo=True)
     os.unlink(tmp.name)
@@ -99,7 +105,9 @@ def install(c):
 @task
 def pack(c):
     output = f"{MANIFEST['platform']}_{MANIFEST['guid']}"
-    release_path = os.path.join(RELEASE_DIR, f"{MANIFEST['platform']}_v{MANIFEST['version']}.zip")
+    release_path = os.path.join(
+        RELEASE_DIR, f"{MANIFEST['platform']}_v{MANIFEST['version']}.zip"
+    )
     if not os.path.isdir(RELEASE_DIR):
         os.mkdir(RELEASE_DIR)
     build(c, output=output, ziparchive=release_path)
