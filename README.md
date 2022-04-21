@@ -11,7 +11,7 @@ A GOG Galaxy 2.0 Community integration for Riot!
 ## Usage / Installation
 
 1. Download the latest release from [releases](https://github.com/urwrstkn8mare/galaxy-riot-integration/releases).
-2. Make sure to delete any other versions of this integration first and quit GOG Galaxy.
+2. Make sure to delete any other versions of this integration first and quit GOG Galaxy ['Settings' -> 'Exit'].
 3. Unzip the file from [releases](https://github.com/urwrstkn8mare/gog-riot-integration/releases) and place the folder in `%LOCALAPPDATA%\GOG.com\Galaxy\plugins\installed`.
 4. Go to GOG Galaxy, open settings, and then go to the integrations tab. You should see `Riot` in the list of integrations and just click `connect`.
 
