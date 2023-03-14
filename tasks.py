@@ -55,7 +55,7 @@ def build(c, output="build", ziparchive=None):
     # as pip requires --no-deps if --platform is used
     print_task("Flattening dependencies to temporary requirements file from Pipfile")
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as tmp:
-        c.run("pipenv lock -r", out_stream=tmp)
+        c.run("pipenv requirements", out_stream=tmp)
 
     # Then install all stuff with pip to output folder
     print_task("Installing with pip for specific version")
