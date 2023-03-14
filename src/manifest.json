@@ -4,8 +4,7 @@
   "guid": "b4c0c2f5-23dc-4326-aa65-e9fabef61a3b",
   "version": "0.2.5",
   "description": "A plugin to integrate with riot games.",
-  "author": "urwrstkn8mare",
-  "email": "shaikhsamit@live.com",
-  "url": "https://github.com/urwrstkn8mare/gog-riot-integration",
+  "author": "samit43",
+  "url": "https://github.com/samit43/gog-riot-integration",
   "script": "plugin.py"
 }
