@@ -1,6 +1,6 @@
 # Desc:     Some tasks to be used by invoke that assists in
 #           developing/releasing GOG Galaxy integrations.
-# Usage:    1. Run 'pip install -r requirements/dev.txt'
+# Usage:    1. Run 'pipenv install --dev'
 #           2. Use 'inv pack' to build releases
 #                  'inv install' to install integration to local GOG Galaxy
 #                  'inv hotfix' to just overwrite the python files in the install directory.
