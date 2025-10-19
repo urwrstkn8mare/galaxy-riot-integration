@@ -27,7 +27,7 @@ DOWNLOAD_URL = {
     GameID.league_of_legends: "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.na.exe",  # noqa: E501
     GameID.legends_of_runeterra: "https://bacon.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.exe",  # noqa: E501
     GameID.valorant: "https://valorant.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.live.eu.exe",  # noqa: E501
-    GameID.twoxko: "https://lion.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.live.am.exe" # noqa: E501
+    GameID.twoxko: "https://lion.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.live.eu.exe" # noqa: E501
 }
 LOCAL_FILE_CACHE = os.path.expandvars(
     "%LOCALAPPDATA%\\GOG.com\\Galaxy\\plugins\\installed\\riot_play_time_cache.txt"
