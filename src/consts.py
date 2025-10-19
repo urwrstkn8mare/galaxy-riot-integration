@@ -24,6 +24,7 @@ GAME_REGISTRY_PATH = {
 UNINSTALL_STRING_KEY = "UninstallString"
 INSTALL_LOCATION_KEY = "InstallLocation"
 DOWNLOAD_URL = {
+    # We won't add all of the League regions here (replace by your region if you want: euw for europe west, na for north america etc...).
     GameID.league_of_legends: "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.na.exe",  # noqa: E501
     GameID.legends_of_runeterra: "https://bacon.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.exe",  # noqa: E501
     GameID.valorant: "https://valorant.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.live.eu.exe",  # noqa: E501
