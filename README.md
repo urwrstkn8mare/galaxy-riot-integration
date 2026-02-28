@@ -47,6 +47,7 @@ Thanks in advance if you want to contribute! Feel free to complete any [todos](#
 
 ## Credits
 
+- urwrstkn8mare for the base version of this integration : <https://github.com/urwrstkn8mare>
 - Heavy inspiration from: <https://github.com/TouwaStar/Galaxy_Plugin_Minecraft>
 - <https://github.com/tylerbrawl/Galaxy-Utils>
 - And of course: <https://github.com/gogcom/galaxy-integrations-python-api>
