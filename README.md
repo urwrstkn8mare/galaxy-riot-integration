@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repository is now archived. As of archiving, [@BellezaEmporium](https://github.com/BellezaEmporium) has done good work in his fork ([BellezaEmporium/galaxy-riot-integration](https://github.com/BellezaEmporium/galaxy-riot-integration)) and you should find a maintained version of this integration there. 
+
 # GOG Galaxy Riot Integration
 
 A GOG Galaxy 2.0 Community integration for Riot!
